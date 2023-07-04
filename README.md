@@ -48,7 +48,7 @@ An ATPG tool using PODEM algorithm in C++ that generates a test to detect any gi
  *   A logical value that indicates the output value of the gate in the current simulation. Currently,
     legal values are, 0, 1, D, B ("not D"), X, and "unset." The "unset" value indicates that the 
     value is unknown because it has not yet been computed. The X value indicates a true "unknown" 
-    input value. You can get the value of a gate's output by using the \a getValue() function, and 
+    input value. You can get the value of a gate's output by using the getValue() function, and 
     set it using the setValue() function. 
     
  *   These values are encoded as numbers, but (like the gate type) you will use macros defined at the
