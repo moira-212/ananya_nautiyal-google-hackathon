@@ -3,18 +3,22 @@ An ATPG tool using PODEM algorithm in C++ that generates a test to detect any gi
 
  #### class Circuit
  * A circuit contains primary inputs and outputs, and a number of interconnected gates.
+   
  * The API for interacting with a Circuit includes functions to access the gates in the
-  system. Functions you may use in your project include \a getPIGates() and \a getPOGates(), which
-  return the inputs and outputs of the circuit. Also useful are \a setPIValues(), which the reference
-  code uses to set the values of the inputs of the circuit, and \a clearGateValues() which it uses
+  system. Functions you may use in your project include getPIGates() and getPOGates(), which
+  return the inputs and outputs of the circuit. Also useful are setPIValues(), which the reference
+  code uses to set the values of the inputs of the circuit, and clearGateValues() which it uses
   to clear the logical values after each simulation iteration.
+
  * An important thing to understand: we will use a special Gate type called a PI to represent
    the circuit's primary inputs. This isn't really a logic gate, it's just a way of 
-   making it easy to access the inputs. So, when you call \a getPIGates() you will get a vector of
+   making it easy to access the inputs. So, when you call  getPIGates() you will get a vector of
    pointers to the special PI gates.
+   
  * We don't use a special structure for the primary outputs (POs); instead we simply maintain a 
-  list of which gates drive the output values. So when you call \a getPOGates() you will get
+  list of which gates drive the output values. So when you call getPOGates() you will get
    a vector of pointers to the normal gates that drive the outputs.
+   
  * Lastly, note that there are a number of functions here that are only used when the initial 
    representation of the circuit is constructed. (This is done for you by the yyparse() function 
    (see main.cc). These functions are ones that you will never have to manipulate yourself, and 
@@ -32,8 +36,8 @@ An ATPG tool using PODEM algorithm in C++ that generates a test to detect any gi
    can simply use the macros like: "if (gateType == GATE_NAND)". If you want to get the type of a gate
    object, call the get_gateType() function.
     
- *   One important thing to note: if this gate represents a primary input (PI) of the circuit, then
-     the gate will be of type GATE_PI.
+ * One important thing to note: if this gate represents a primary input (PI) of the circuit, then
+   the gate will be of type GATE_PI.
    
  * Vectors of pointers to this gate's predecessors and successors. The predecessors are the gates 
    whose outputs are the inputs to this gate. (If this gate is a PI, then it has no predecessors.)
@@ -45,7 +49,7 @@ An ATPG tool using PODEM algorithm in C++ that generates a test to detect any gi
     legal values are, 0, 1, D, B ("not D"), X, and "unset." The "unset" value indicates that the 
     value is unknown because it has not yet been computed. The X value indicates a true "unknown" 
     input value. You can get the value of a gate's output by using the \a getValue() function, and 
-    set it using the \a setValue() function. 
+    set it using the setValue() function. 
     
  *   These values are encoded as numbers, but (like the gate type) you will use macros defined at the
      top of ClassGate.h (instead of hard-coding the numbers into the system). For example, to set the
